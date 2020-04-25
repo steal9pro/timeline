@@ -1,0 +1,31 @@
+.group-container {
+    position: relative;
+    &:hover {
+        .group {
+            display: block;
+        }
+    }
+
+    .group {
+        display: none;
+        position: absolute;
+        border: 1px solid black;
+        padding: 5px 20px;
+        background: rgba(0, 0, 0, 0.1);
+        left: -35px;
+        top: 30px;
+
+        .group-item {
+            display: flex;
+            margin: 10px 0;
+
+            app-event {
+                margin-right: 5px;
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+}

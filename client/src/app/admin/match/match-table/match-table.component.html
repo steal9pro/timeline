@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header">
+        List of matches
+    </div>
+
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <th *ngFor="let prop of props">
+                    {{prop}}
+                </th>
+                <td></td>
+            </thead>
+        
+            <tbody>
+                <tr *ngFor="let row of dataSource">
+                    <td>
+                        {{row?._id}}
+                    </td>
+                    <td>
+                        {{row?.time * 1000|date: 'short'}}
+                    </td>
+                    <td>
+                        <a [routerLink]="['/dashboard', row?._id]" class="btn btn-outline-info">Explore</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

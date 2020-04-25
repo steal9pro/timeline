@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-10">
+        Match: {{match?._id}}
+    </div>
+
+    <div class="col-2 nav-container">
+        <a [routerLink]="['/dashboard']" class="btn btn-info">Back</a>
+    </div>
+</div>
+
+<div class="row">
+    <app-timeline [events]="match?.events"></app-timeline>
+</div>

@@ -1,0 +1,20 @@
+@import '~bootstrap/scss/bootstrap';
+
+// for custom variable
+@import 'variables';
+
+// custom style
+@import 'custom';
+
+body {
+    height: 100vh;
+}
+
+app-login {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.1);
+}

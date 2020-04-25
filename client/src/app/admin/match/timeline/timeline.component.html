@@ -1,0 +1,14 @@
+<div class="timeline-container">
+
+    <div *ngFor="let p of counter(partsCount); let i = index" [ngClass]="'part-' + i" class="part">
+        <div class="event-container">
+            <ng-template [ngIf]="parts[i + 1].events.length < 2" [ngIfElse]="group">
+                <app-event *ngFor="let event of parts[i + 1].events" [event]="event"></app-event>
+            </ng-template>
+
+            <ng-template #group>
+                <app-event-group [events]="parts[i + 1].events"></app-event-group>
+            </ng-template>
+        </div>
+    </div>
+</div>

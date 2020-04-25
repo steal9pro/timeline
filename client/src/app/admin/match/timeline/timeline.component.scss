@@ -1,0 +1,23 @@
+.timeline-container {
+    margin-top: 10px;
+    display: flex;
+    padding: 5px;
+    border: 1px solid #0bf7ec;
+    background: rgba(182, 255, 191, 0.38);
+    height: 100%;
+
+    .part {
+        width: 100%;
+        display: flex;
+        position: relative;
+    }
+
+    .event-container {
+        position: absolute;
+        display: flex;
+    }
+
+    app-event {
+        margin: 0 1px;
+    }
+}

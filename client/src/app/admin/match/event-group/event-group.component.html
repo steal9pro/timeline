@@ -1,0 +1,10 @@
+<div class="group-container">
+    <app-event [event]="events[0]"></app-event>
+
+    <div class="group">
+        <div *ngFor="let event of events" class="group-item">
+            <app-event [event]="event"></app-event>
+            <p>{{event.time|tommss}}</p>
+        </div>
+    </div>
+</div>

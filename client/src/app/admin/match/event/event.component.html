@@ -1,0 +1,7 @@
+<div class="event" [ngClass]="{
+    'kill': event.type === events.Kill, 
+    'death': event.type === events.Death,
+    'assist': event.type === events.Assist
+}">
+    {{event?.id}}
+</div>
