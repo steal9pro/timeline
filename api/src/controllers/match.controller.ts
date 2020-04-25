@@ -1,3 +1,4 @@
+import { ApiResponse } from "src/interfaces/api-response.interface";
 import { Controller, Get, UseGuards, Param } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { MatchInterface } from "src/models/match.schema";
@@ -12,12 +13,24 @@ export class MatchController {
   ) {}
 
   @Get()
-  async getMatches() {
-    return this.matchModel.find().exec();
+  async getMatches(): Promise<ApiResponse<MatchInterface[]>> {
+    const matches = await this.matchModel.find().select('_id time').exec();
+
+    return {
+      success: true,
+      data: matches,
+    };
   }
 
   @Get("/:id")
-  async getMatch(@Param("id") id: string) {
-    return this.matchModel.findById(id).exec();
+  async getMatch(
+    @Param("id") id: string
+  ): Promise<ApiResponse<MatchInterface>> {
+    const match = await this.matchModel.findById(id).exec();
+
+    return {
+      success: true,
+      data: match,
+    };
   }
 }

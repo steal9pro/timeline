@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 
 export type User = {
   id: number;
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -13,7 +13,7 @@ export class UsersService {
 
   constructor(@InjectModel("users") private userModel: Model<any>) {}
 
-  async findOne(username: string): Promise<User | null> {
-    return this.userModel.findOne({username}).exec();
+  async findOne(email: string): Promise<User | null> {
+    return this.userModel.findOne({email}).exec();
   }
 }
