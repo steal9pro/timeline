@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TimelinePart } from 'models/timeline-part';
+import { Component, Input } from '@angular/core';
 import { MatchEvent } from 'models/event';
 
 const delimiter = 60;
@@ -9,8 +9,17 @@ const delimiter = 60;
     templateUrl: './timeline.component.html',
     styleUrls: ['./timeline.component.scss'],
 })
-export class TimelineComponent implements OnInit, OnChanges {
-    @Input() events: MatchEvent[];
+export class TimelineComponent {
+    @Input()
+    set events(events: MatchEvent[]) {
+        if (!events) {
+            return;
+        }
+        this.maxTime = this.calculateMaxTime(events);
+        this.getPartsCount();
+        this.generateTimelineParts();
+        this.distributeEvents(events);
+    }
 
     private maxTime: number;
     public parts = {};
@@ -18,18 +27,7 @@ export class TimelineComponent implements OnInit, OnChanges {
 
     constructor() {}
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.events && !changes.events.firstChange) {
-            this.maxTime = this.calculateMaxTime(changes.events.currentValue);
-            this.getPartsCount();
-            this.generateTimelineParts();
-            this.distributeEvents();
-        }
-    }
-
-    ngOnInit(): void {}
-
-    counter(i) {
+    counter(i): Array<unknown> {
         return new Array(i);
     }
 
@@ -42,11 +40,11 @@ export class TimelineComponent implements OnInit, OnChanges {
         }, 0);
     }
 
-    private getPartsCount() {
+    private getPartsCount(): void {
         this.partsCount = Math.ceil(this.maxTime / delimiter);
     }
 
-    private generateTimelineParts() {
+    private generateTimelineParts(): void {
         for (let i = 0; i < this.partsCount; i++) {
             const part = new TimelinePart();
             part.start = i * delimiter;
@@ -56,8 +54,8 @@ export class TimelineComponent implements OnInit, OnChanges {
         }
     }
 
-    private distributeEvents() {
-        this.events.map((event: MatchEvent) => {
+    private distributeEvents(events: MatchEvent[]): void {
+        events.map((event: MatchEvent) => {
             const eventPart = Math.ceil(event.time / delimiter);
 
             this.parts[eventPart].events.push(event);
