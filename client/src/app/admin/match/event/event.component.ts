@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { EventType } from 'enums/event.enum';
 import { MatchEvent } from 'models/event';
-import { EventType } from '../../../enums/event.enum';
 
 @Component({
     selector: 'app-event',

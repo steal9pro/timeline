@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoggedInGuard } from './guards/logged-in.guard';
 import { TemplateComponent } from './admin/template/template.component';
+import { Routes, RouterModule } from '@angular/router';
+import { LoggedInGuard } from 'guards/logged-in.guard';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
     {

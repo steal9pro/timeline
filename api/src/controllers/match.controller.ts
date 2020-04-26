@@ -4,6 +4,7 @@ import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { MatchInterface } from "src/models/match.schema";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { GeneralError } from "src/errors/general-error";
 
 @UseGuards(JwtAuthGuard)
 @Controller("matches")
@@ -14,7 +15,10 @@ export class MatchController {
 
   @Get()
   async getMatches(): Promise<ApiResponse<MatchInterface[]>> {
-    const matches = await this.matchModel.find().select('_id time').exec();
+    const matches = await this.matchModel
+      .find()
+      .select("_id time")
+      .exec();
 
     return {
       success: true,
@@ -26,11 +30,18 @@ export class MatchController {
   async getMatch(
     @Param("id") id: string
   ): Promise<ApiResponse<MatchInterface>> {
-    const match = await this.matchModel.findById(id).exec();
+    try {
+      const match = await this.matchModel.findById(id).exec();
 
-    return {
-      success: true,
-      data: match,
-    };
+      return {
+        success: true,
+        data: match,
+      };
+    } catch (e) {
+      throw new GeneralError({
+        status: 400,
+        message: e.message
+      });
+    }
   }
 }

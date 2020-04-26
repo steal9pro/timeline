@@ -7,8 +7,8 @@ import { EventComponent } from './match/event/event.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MatchService } from 'services/match.service';
 import { CommonModule } from '@angular/common';
+import { TommssPipe } from 'pipes/tommss.pipe';
 import { NgModule } from '@angular/core';
-import { TommssPipe } from '../pipes/tommss.pipe';
 
 @NgModule({
     declarations: [
