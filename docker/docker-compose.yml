@@ -25,12 +25,8 @@ services:
         environment:
           - NODE_ENV=production
     
-    # client:
-    #     container_name: angular_wolf
-    #     build: ./../client
-    #     volumes:
-    #         - ./../client:/usr/src/app
-    #     ports: 
-    #         - 4200:4200
-    #     command: >
-    #         bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+    client:
+        container_name: angular_wolf
+        build: ./../client
+        ports: 
+            - 8888:80
