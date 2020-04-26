@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     public form: FormGroup;
+    public wrongCredentials = false;
 
     constructor(
         private readonly authService: AuthService,
@@ -22,17 +23,22 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
+    onSubmit(): void {
+        this.wrongCredentials = false;
 
-    onSubmit() {
         if (this.form.valid) {
-            this.authService.login(this.form.value).subscribe(([success, message]) => {
-                if (success) {
-                    this.router.navigate(['/dashboard']);
-                } else {
-                    console.log('error');
-                }
-            });
+            this.authService.login(this.form.value).subscribe(
+                ([success, message]) => {
+                    if (success) {
+                        this.router.navigate(['/dashboard']);
+                    } else {
+                        console.log('error');
+                    }
+                },
+                (e) => {
+                    this.wrongCredentials = true;
+                },
+            );
         }
     }
 }

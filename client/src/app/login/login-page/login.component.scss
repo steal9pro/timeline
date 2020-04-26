@@ -7,4 +7,23 @@
     .text-hint {
         font-size: 9px;
     }
+
+    .wrong-credentials {
+        color: red;
+        font-size: 15px;
+        margin-top: 5px;
+    }
+
+    .error {
+        display: none;
+        color: red;
+        font-size: 11px;
+        margin-top: 2px;
+    }
+
+    &.form-submitted {
+        .error {
+            display: block;
+        }
+    }
 }

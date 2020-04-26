@@ -1,19 +1,29 @@
 <div class="card">
   <div class="card-body">
-    <form class="form-signin" [formGroup]="form" (submit)="onSubmit()">
+    <form class="form-signin" [formGroup]="form" (submit)="onSubmit()" #ngForm="ngForm" [ngClass]="{ 'form-submitted': ngForm.submitted}">
   
       <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
       </div>
 
       <div class="form-label-group">
-          <label for="inputEmail">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email">
+          <label for="email">Email address</label>
+          <input type="email" id="email" class="form-control" placeholder="Email address" formControlName="email">
+          <div class="error" *ngIf="form.controls['email'].hasError('required')">
+            Email is required.
+          </div>
       </div>
   
       <div class="form-label-group">
-          <label for="inputPassword">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" formControlName="password">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Password" formControlName="password">
+          <div class="error" *ngIf="form.controls['password'].hasError('required')">
+            Password is required.
+          </div>
+      </div>
+
+      <div class="wrong-credentials" *ngIf="wrongCredentials">
+        <p>Username or password are wrong!</p>
       </div>
   
       <button class="btn btn-lg btn-primary btn-block mt-4 mb-4" type="submit">Sign in</button>
