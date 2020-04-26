@@ -15,15 +15,22 @@ export class MatchController {
 
   @Get()
   async getMatches(): Promise<ApiResponse<MatchInterface[]>> {
-    const matches = await this.matchModel
-      .find()
-      .select("_id time")
-      .exec();
+    try {
+      const matches = await this.matchModel
+        .find()
+        .select("_id time")
+        .exec();
 
-    return {
-      success: true,
-      data: matches,
-    };
+      return {
+        success: true,
+        data: matches,
+      };
+    } catch (e) {
+      throw new GeneralError({
+        status: 400,
+        message: e.message,
+      });
+    }
   }
 
   @Get("/:id")
@@ -40,7 +47,7 @@ export class MatchController {
     } catch (e) {
       throw new GeneralError({
         status: 400,
-        message: e.message
+        message: e.message,
       });
     }
   }
